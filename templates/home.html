@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <div><b style="font-size: 400%; text-align: center;;">Hi {{ user.username }}</b><div>
+    <div>
+      <h2><a href="{% url 'articleslist' %}" style="text-transform: capitalize; color: black; text-align: center;">See Articles </a><h2>
+    </div>
+
+    <p><a href="{% url 'logout' %}" style="text-transform: capitalize; color: black; text-align: center;">Log Out</a></p>
+
+   {% else %}
+   <b style="font-size: 150%; color: black;"><p>You are not logged in </p></b>
+   <a href="{% url 'login' %}" style="text-transform: capitalize; color: black; text-align: center;">Log In</a>|
+   <a href="{% url 'signup' %}" style="text-transform: capitalize; color: black; text-align: center;">Sign Up</a>
+   
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+  {{ article.title }}
+{% endblock %}
+{% block content %}
+  <div class="article-entry">
+    <h2 style="text-decoration: underline;">{{ articles.title }}</h2>
+    <b><p>{{ articles.author }}  |  {{ articles.date }}</p><b>
+    <p>{{ articles.body }}</p>
+  </div>
+  <hr>
+  <h3>Comments</h3>
+  
+  {% for comment in articles.comment_set.all  %}
+    <b><p>{{comment.author}} &middot; {{comment}}</p><b>
+    
+  {% endfor %}
+  <hr>
+  <b><h4>
+    Add a comment 
+  </h4><b>
+  <form action="" method="post">{% csrf_token %}
+    <b>{{form|crispy}}<b>
+    <input class="btn btn-dark ml-2" type="submit" value="Post">
+  </form>
+  <hr>
+    
+  <hr>
+
+ <p> <a href="{% url 'articles_edit' articles.pk %}" style="color:black;">Edit Article</a></p>
+ <p><a href="{% url 'articles_delete' articles.pk %}" style="color:black;">Delete Article</a></p>
+ <p>To <a href="{% url 'articleslist' %}" style="color:black;">All Articles</a></p> 
+{% endblock %}
